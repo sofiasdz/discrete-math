@@ -137,6 +137,18 @@ public class Tp1Impl<T> implements Tp1<T> {
         }
         return result;
     }
+    public String matrixToString(int[][] matrix){
+        String rta="{";
+        for (int i = 0; i <matrix.length ; i++) {
+            String row="(";
+            for (int j = 0; j < matrix[i].length ; j++) {
+                row=row+" "+matrix[i][j];
+            }
+            row=row+")";
+            rta=rta+row;
+        }
+        return rta+"}";
+    }
 
     private List<Edge<T>> getEdgeList(Graph<T> graph){
         List<T> vertexes = graph.getVertexes();

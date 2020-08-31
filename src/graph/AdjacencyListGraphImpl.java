@@ -53,12 +53,18 @@ public class AdjacencyListGraphImpl<T> implements Graph<T> {
 
     @Override
     public void addEdge(T v, T w) {
-        if(!(!this.hasVertex(v)||!this.hasVertex(w))&&!this.hasEdge(v,w)){
-        ElementAndIndex<T> vElem=getElementAndIndex(v);
+         if(!(!this.hasVertex(v)||!this.hasVertex(w))&&!this.hasEdge(v,w)){
+             if(v.equals(w)){
+                 ElementAndIndex<T> vElem=getElementAndIndex(v);
+                 vElem.getElement().getConnectedTo().add(vElem.getIndex());
+             }
+           else  { ElementAndIndex<T> vElem=getElementAndIndex(v);
         ElementAndIndex<T> wElem=getElementAndIndex(w);
         vElem.getElement().getConnectedTo().add(wElem.getIndex());
         wElem.getElement().getConnectedTo().add(vElem.getIndex());
-        alpha++;}
+        }
+         alpha++;
+         }
     }
 
     @Override
