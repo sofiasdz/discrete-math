@@ -1,6 +1,7 @@
 package MyTests;
 
 import graph.AdjacencyListGraphImpl;
+import graph.EdgeArrayGraphImpl;
 import graph.Graph;
 import org.junit.Test;
 import tp1.Tp1;
@@ -38,7 +39,7 @@ public class GraphTest1 {
 
     @Test
     public void test_003() {
-        AdjacencyListGraphImpl graph=new AdjacencyListGraphImpl<String>();
+        Graph graph=new EdgeArrayGraphImpl<String>();
         Tp1Impl tp1=new Tp1Impl<>();
         graph.addVertex(1);
         graph.addVertex(2);
@@ -56,13 +57,14 @@ public class GraphTest1 {
         graph.addEdge(4, 6);
         graph.addEdge(3, 6);
         System.out.println(tp1.matrixToString(tp1.exercise_i(graph)));
-      /*  {1,0,0,0,0,0,0,0},
+      /*
+        {1,0,0,0,0,0,0,0},
         {1,1,1,0,0,0,0,0},
         {0,1,0,1,1,0,0,1},
         {0,0,1,1,0,1,1,0},
         {0,0,0,0,1,1,0,0},
-        {0,0,0,0,0,0,1,1}*/
-
+        {0,0,0,0,0,0,1,1}
+        */
     }
 
 
