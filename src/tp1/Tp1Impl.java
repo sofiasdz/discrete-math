@@ -122,6 +122,59 @@ public class Tp1Impl<T> implements Tp1<T> {
 
     @Override
     public int[][] exercise_i(Graph<T> graph) {
-        throw new UnsupportedOperationException("TODO");
+        List<Edge<T>> edges = getEdgeList(graph);
+        List<T> vertexes = graph.getVertexes();
+        int[][] result = new int[graph.order()][edges.size()];
+        for (int i = 0; i <graph.order() ; i++) {
+            List<T> adjacents = graph.getAdjacencyList(vertexes.get(i));
+            for (int j = 0; j <adjacents.size(); j++) {
+                Edge<T> edgeToCheck = new Edge<>(vertexes.get(i),adjacents.get(j));
+                result[i][edges.indexOf(edgeToCheck)] = 1;
+            }
+            for (int j = 0; j < edges.size(); j++) {
+                if(result[i][j]!=1) result[i][j] = 0;
+            }
+        }
+        return result;
+    }
+
+    private List<Edge<T>> getEdgeList(Graph<T> graph){
+        List<T> vertexes = graph.getVertexes();
+        List<Edge<T>> result = new ArrayList<>();
+        for (int i = 0; i < vertexes.size(); i++) {
+            List<T> adjacents = graph.getAdjacencyList(vertexes.get(i));
+            for (int j = 0; j < adjacents.size(); j++) {
+                Edge<T> edgeToCheck = new Edge<>(vertexes.get(i), adjacents.get(j));
+                if(!result.contains(edgeToCheck)){
+                    result.add(edgeToCheck);
+                }
+            }
+        }
+        return result;
+    }
+
+    private class Edge<T>{
+        T first;
+        T second;
+
+        private Edge(T first, T second){
+            this.first=first;
+            this.second=second;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return this.equals((Edge<T>) obj);
+        }
+
+        public boolean equals(Edge<T> o) {
+            if (this.first.equals(o.first)  && this.second.equals(o.second)) return true;
+            if (this.first.equals(o.second) && this.second.equals(o.first)) return true;
+            return false;
+        }
+
+        public String toString(){
+            return ("{"+first.toString()+", "+second.toString()+"}");
+        }
     }
 }
