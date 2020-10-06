@@ -13,6 +13,7 @@ public class Tp2Impl<T> implements Tp2<T> {
         stack.push(graph.getVertexes().get(0));
         while (!stack.isEmpty()){
             T v= stack.pop();
+            if (!dfs.contains(v)) dfs.add(v);
             //procesar
             vertex.remove(v);
             List<T> adyacentes=graph.getAdjacencyList(v);
