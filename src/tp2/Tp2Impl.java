@@ -66,9 +66,34 @@ public class Tp2Impl<T> implements Tp2<T> {
         throw new UnsupportedOperationException("TODO");
     }
 
+
     @Override
     public boolean exercise_d(Graph<T> graph) {
-        throw new UnsupportedOperationException("TODO");
+        //    d) Verificar si un grafo es conexo.
+        List<T> dfs=new ArrayList<>();
+        List<T> vertex=graph.getVertexes();
+        Stack<T> stack= new Stack();
+        List vertexes=graph.getVertexes();
+        if(vertex.size()==0) return false;
+        stack.push(vertex.get(0));
+        while (!stack.isEmpty()){
+            T v= stack.pop();
+            if (!dfs.contains(v)) dfs.add(v);
+            //procesar
+            vertex.remove(v);
+            List<T> adyacentes=graph.getAdjacencyList(v);
+            for (int i = 0; i <adyacentes.size() ; i++) {
+                if(vertex.contains(adyacentes.get(i))) {
+                    stack.push(adyacentes.get(i));
+                }
+
+            }
+        }
+        if(vertex.isEmpty()) return true;
+        return false;
+
+
+
     }
 
     @Override
