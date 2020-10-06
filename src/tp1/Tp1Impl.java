@@ -3,9 +3,10 @@ package tp1;
 import graph.EdgeArrayGraphImpl;
 import graph.Graph;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-//hhhhh
+//holi
 // TODO: implement
 public class Tp1Impl<T> implements Tp1<T> {
     @Override
@@ -136,7 +137,6 @@ public class Tp1Impl<T> implements Tp1<T> {
         }
         return result;
     }
-
     public String matrixToString(int[][] matrix){
         String rta="{";
         for (int i = 0; i <matrix.length ; i++) {
@@ -150,12 +150,6 @@ public class Tp1Impl<T> implements Tp1<T> {
         return rta+"}";
     }
 
-    //Este método recrea la EdgeList yendo en orden, y omite duplicados.
-    //Por lo tanto si creamos la Edge {2,1} cuando esto la recree en orden
-    //va a quedar como {1,2} haciendo que el orden de las columnas en la
-    //matriz de incidencia cambie. Si bien el resultado es una matriz "equivalente"
-    //a la esperada en el test, al no ser identica en cuanto a disposición
-    //el test falla.
     private List<Edge<T>> getEdgeList(Graph<T> graph){
         List<T> vertexes = graph.getVertexes();
         List<Edge<T>> result = new ArrayList<>();

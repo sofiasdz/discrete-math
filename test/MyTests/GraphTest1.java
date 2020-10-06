@@ -39,7 +39,7 @@ public class GraphTest1 {
 
     @Test
     public void test_003() {
-        Graph graph=new EdgeArrayGraphImpl<String>();
+        AdjacencyListGraphImpl graph=new AdjacencyListGraphImpl<String>();
         Tp1Impl tp1=new Tp1Impl<>();
         graph.addVertex(1);
         graph.addVertex(2);
@@ -57,15 +57,43 @@ public class GraphTest1 {
         graph.addEdge(4, 6);
         graph.addEdge(3, 6);
         System.out.println(tp1.matrixToString(tp1.exercise_i(graph)));
-      /*
-        {1,0,0,0,0,0,0,0},
+       /* {1,0,0,0,0,0,0,0},
         {1,1,1,0,0,0,0,0},
         {0,1,0,1,1,0,0,1},
         {0,0,1,1,0,1,1,0},
         {0,0,0,0,1,1,0,0},
-        {0,0,0,0,0,0,1,1}
-        */
+        {0,0,0,0,0,0,1,1}*/
+
+
     }
 
+
+    @Test
+    public void test_004() {
+        AdjacencyListGraphImpl graph1=new AdjacencyListGraphImpl<String>();
+        Tp1Impl tp1=new Tp1Impl<>();
+        graph1.addVertex(1);
+        graph1.addVertex(2);
+        graph1.addVertex(3);
+
+        graph1.addEdge(1, 2);
+        graph1.addEdge(2, 3);
+        graph1.addEdge(3, 1);
+
+        EdgeArrayGraphImpl graph2=new EdgeArrayGraphImpl();
+        graph2.addVertex(1);
+        graph2.addVertex(2);
+        graph2.addVertex(3);
+
+        graph2.addEdge(1, 2);
+        graph2.addEdge(2, 3);
+        graph2.addEdge(3, 1);
+
+        System.out.println((tp1.matrixToString(tp1.exercise_i(graph2))));
+        System.out.println(tp1.matrixToString(tp1.exercise_i(graph1)));
+
+
+
+    }
 
 }
