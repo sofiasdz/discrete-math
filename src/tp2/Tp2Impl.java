@@ -37,6 +37,7 @@ public class Tp2Impl<T> implements Tp2<T> {
         while (!queue.isEmpty()) {
             T v = queue.poll();
             //procesar
+            if (!dfs.contains(v)) dfs.add(v);
             vertex.remove(v);
             List<T> adyacentes = graph.getAdjacencyList(v);
             for (int i = 0; i < adyacentes.size(); i++) {
