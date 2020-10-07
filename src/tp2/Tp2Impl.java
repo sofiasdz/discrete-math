@@ -1,5 +1,7 @@
 package tp2;
 
+import graph.AdjacencyListGraphImpl;
+import graph.EdgeArrayGraphImpl;
 import graph.Graph;
 
 import java.util.*;
@@ -56,8 +58,87 @@ public class Tp2Impl<T> implements Tp2<T> {
 
     @Override
     public boolean exercise_b(Graph<T> graph, T v) {
-        throw new UnsupportedOperationException("TODO");
+        //b) Dado un grafo sin lazos y un vértice v, verificar si hay un ciclo de v a v.
+      /*  List<T> dfs=new ArrayList<>();
+        List<T> vertex=graph.getVertexes();
+        if(vertex.size()==0) return false;
+        vertex.add(v);
+        Stack<T> stack= new Stack();
+        stack.push(v);
+        while (!stack.isEmpty()){
+            T a= stack.pop();
+            if (!dfs.contains(a)|a.equals(v)) dfs.add(a);
+            if (dfs.size()>1 && dfs.lastIndexOf(v)==dfs.size()) return true;
+            //procesar
+            vertex.remove(a);
+            List<T> adyacentes=graph.getAdjacencyList(a);
+            for (int i = 0; i <adyacentes.size() ; i++) {
+                if(vertex.contains(adyacentes.get(i))) {
+                    stack.push(adyacentes.get(i));
+                }
+
+            }
+        }*/
+        if(existsCycle(graph,v)) return true;
+        return false;
+
     }
+
+
+
+    public boolean existsCycle(Graph<T> g, T s) {
+        List<T> notvisited = g.getVertexes();
+        List<T> vertexes=g.getAdjacencyList(s);
+        for (int i = 0; i <vertexes.size() ; i++) {
+             Graph<T> newGraph=copy(g);
+             newGraph.removeEdge(s,vertexes.get(i));
+            if(existsPath1(newGraph, vertexes.get(i), s, notvisited)) return true;
+        }
+     return  false;
+
+    }
+
+
+    public Graph<T> copy(Graph<T> graph){
+        Graph<T> newGraph= new EdgeArrayGraphImpl<>();
+        List<T> vertexes=graph.getVertexes();
+        for (int i = 0; i <vertexes.size() ; i++) {
+            newGraph.addVertex(vertexes.get(i));
+
+        }
+        for (int i = 0; i <vertexes.size() ; i++)
+        {
+            List<T> adyadencyList=graph.getAdjacencyList(vertexes.get(i));
+            for (int j = 0; j <adyadencyList.size() ; j++) {
+                if(!newGraph.hasEdge(vertexes.get(i),adyadencyList.get(j))){
+                    newGraph.addEdge(vertexes.get(i),adyadencyList.get(j));
+                }
+
+            }
+        }
+        return newGraph;
+    }
+
+
+
+    private boolean existsPath1(Graph<T> g, T s, T t, List<T> notvisited) {
+        if ( g.hasEdge(s,t))
+            return true;
+        List<T> lst; // lista de adyacentes
+        //visited[s]= true;
+        notvisited.remove(s);
+        lst = g.getAdjacencyList(s);
+        if (lst.isEmpty()) return false;
+        for(int j =0 ; j < lst.size() ; j++){
+            //if ( !visited[(Integer) lst.get(j)] && existsPath(g,  lst.get(j), t, visited))
+            if ( notvisited.contains(lst.get(j))&& existsPath1(g,  lst.get(j), t, notvisited))
+                return true;
+        }
+        return false;
+    }
+
+
+
 
     @Override
     public boolean exercise_c(Graph<T> graph) {

@@ -16,6 +16,6 @@ public class GraphFactoryImpl<T> implements GraphFactory<T> {
     //    Returns a random graph
     @Override
     public Graph<T> getGraph() {
-        return new AdjacencyListGraphImpl<>();
+        return new EdgeArrayGraphImpl<>();
     }
 }

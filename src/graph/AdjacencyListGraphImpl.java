@@ -136,7 +136,7 @@ public class AdjacencyListGraphImpl<T> implements Graph<T> {
         for (int i = 0; i < n ; i++) {
             if(elements[i].getData().equals(v)) return elements[i].getConnectedTo();
         }
-    return null;
+    return new ArrayList<>();
     }
 
     public String toString(){
