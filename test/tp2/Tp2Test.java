@@ -505,8 +505,8 @@ public class Tp2Test extends SkipRule {
 
         assertTrue(tp2.exercise_j(graph1, graph2));
         assertTrue(tp2.exercise_j(graph1, graph3));
-        assertTrue(tp2.exercise_j(graph1, graph4));
 
+        assertFalse(tp2.exercise_j(graph1, graph4));
         assertFalse(tp2.exercise_j(graph1, graph5));
         assertFalse(tp2.exercise_j(graph1, graph6));
     }
