@@ -40,7 +40,7 @@ interface Tp2<T> {
 
 //    Part 2:
 //    i) Dado dos grafos g1 y g2, verifique si g1 es subgrafo de g2.
-//    j) Dado dos grafos g1 y g2, verifique si g1 es subgrafo recubridor de g2.
+//    j) Dado dos grafos g1 y g2, verifique si g2 es subgrafo recubridor de g1.
 //    k) Verificar si un grafo es completo.
 //    l) Hallar el grafo complementario.
 //    m) Calcular el grado de un vértice dado
