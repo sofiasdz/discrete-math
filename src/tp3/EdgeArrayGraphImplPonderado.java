@@ -142,11 +142,11 @@ public class EdgeArrayGraphImplPonderado<T>  implements GraphWithWeight<T> {
 
     @Override
     public int getWeight(T v, T w) {
-        if(a==0) return -1;
+        if(a==0) return INFINITE;
         for (int i = 0; i <a ; i++) {
             if(edgeList.get(i).getFirst().equals(v) && edgeList.get(i).getSecond().equals(w)) return edgeList.get(i).getWeight();
         }
-        return -1;
+        return INFINITE;
     }
 
     @Override

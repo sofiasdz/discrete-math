@@ -1,19 +1,24 @@
 package tp3;
 
 public class DNode<T> {
-    final private int T;
-    final private int weight;
+    private final T t;
+    private int weight;
 
-    public DNode(int t, int weight) {
-        T = t;
+    public DNode( T t, int weight) {
+        this.t = t;
         this.weight = weight;
     }
 
-    public int getT() {
-        return T;
+    public T getT() {
+        return t;
     }
 
     public int getWeight() {
         return weight;
     }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
 }

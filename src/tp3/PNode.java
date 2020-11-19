@@ -2,7 +2,7 @@ package tp3;
 
 public class PNode<T> {
    private final T end;
-   private final T previous;
+   private T previous;
 
     public PNode(T end, T previous) {
         this.end = end;
@@ -15,5 +15,9 @@ public class PNode<T> {
 
     public T getPrevious() {
         return previous;
+    }
+
+    public void setPrevious(T previous) {
+        this.previous = previous;
     }
 }
