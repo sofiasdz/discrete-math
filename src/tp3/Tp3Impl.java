@@ -8,7 +8,7 @@ public class Tp3Impl<T> implements Tp3<T>{
     public DijkstraResult<T> dijkstra(GraphWithWeight<T> graphWithWeight,T startingPoint) {
         //1er paso construyo el vector d, DNode contiene el vertice y el valor que cuesta ir del starting point a ese vertice
         List<DNode<T>> dVector= new ArrayList<>();
-        int length=graphWithWeight.alpha();
+        int length=graphWithWeight.order();
         List<T> vertexes= graphWithWeight.getVertexes();
         for (int i = 0; i <length; i++) {
            DNode<T> dNode;
@@ -16,7 +16,7 @@ public class Tp3Impl<T> implements Tp3<T>{
                 dNode=new DNode<T>(startingPoint,0);
             }
            else {
-               // el 999999999  va a contar como nuestro infinito, es decir lo que ponemos cuando no hay una arista directa desde startingPoint
+               // el Integer.MAX_VALUE va a contar como nuestro infinito, es decir lo que ponemos cuando no hay una arista directa desde startingPoint
                 dNode = new DNode<T>(vertexes.get(i), graphWithWeight.getWeight(startingPoint, vertexes.get(i)));
             }
            dVector.add(dNode);
@@ -34,11 +34,13 @@ public class Tp3Impl<T> implements Tp3<T>{
         List<T> sVector= new ArrayList<>();
         sVector.add(startingPoint);
         // empieza el ciclo del algoritmo
-    while (!sContainsAllVertexes(sVector,vertexes)) {
+        int step=0;
+    while (step<length-2) {
         // mientras queden vertices que NO esten en sVector el algoritmo continua
-        T w=searchForW(sVector,vertexes);
+        T w=searchForW(sVector,vertexes, dVector);
         sVector.add(w);
-        //elegimos el primer vertice que no esta en sVector para ser nuestro w y lo agregamos  a sVector
+        //elegimos el vertice que no esta en sVector, cuyo weight en d sea el minimo, para ser nuestro w y lo agregamos  a sVector
+        System.out.println(sVector.toString());
         for (int i = 0; i < length; i++) {
             //para todos los vertices comparamos que camino es menor, el que esta o el que pasa por w
             int currentWeight = dVector.get(i).getWeight();
@@ -47,8 +49,8 @@ public class Tp3Impl<T> implements Tp3<T>{
                 dVector.get(i).setWeight(potentialLowerWeight);
                 pVector.get(i).setPrevious(w);
             }
-
         }
+        step++;
     }
     return new DijkstraResult<>(dVector,pVector);
     }
@@ -62,12 +64,13 @@ public class Tp3Impl<T> implements Tp3<T>{
         return true;
     }
 
-    T searchForW(List<T> sVector, List<T> vertexes){
-        for (int i = 0; i <vertexes.size() ; i++) {
-            if(!sVector.contains(vertexes.get(i))) return vertexes.get(i);
+    T searchForW(List<T> sVector, List<T> vertexes, List<DNode<T>> dVector){
+        DNode<T> min = new DNode<>((T)new Object(), Integer.MAX_VALUE);
+        for (int i = 0; i < dVector.size(); i++) {
+            if(dVector.get(i).getWeight()<min.getWeight() && !sVector.contains(dVector.get(i).getT())) min = dVector.get(i);
         }
+        if(min.getWeight()!= Integer.MAX_VALUE) return min.getT();
         return null;
-
     }
 
     int getDValueOf(T vertex,List<DNode<T>> dVector){

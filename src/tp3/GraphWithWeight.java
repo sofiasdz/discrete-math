@@ -18,6 +18,5 @@ public interface GraphWithWeight<T> {
         int alpha();
 
         List<T> getAdjacencyList(T v);
-        static int INFINITE=99999999;
-
+        static int INFINITE=999999999;
 }

@@ -26,4 +26,5 @@ public class DijkstraResult<T> {
         this.d = d;
         this.path = path;
     }
+
 }

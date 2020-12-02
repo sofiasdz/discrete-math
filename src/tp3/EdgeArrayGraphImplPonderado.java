@@ -3,6 +3,7 @@ package tp3;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 public class EdgeArrayGraphImplPonderado<T>  implements GraphWithWeight<T> {
     private class Edge<T>{
@@ -103,7 +104,7 @@ public class EdgeArrayGraphImplPonderado<T>  implements GraphWithWeight<T> {
         n--;
     }
 
-    private boolean hasAnyEdge(T v){
+    public boolean hasAnyEdge(T v){
         for (int i = 0; i < a ; i++) {
             if(edgeList.get(i).first.equals(v) || edgeList.get(i).second.equals(v)) return true;
         }
@@ -134,8 +135,9 @@ public class EdgeArrayGraphImplPonderado<T>  implements GraphWithWeight<T> {
     @Override
     public boolean hasEdge(T v, T w) {
         if(a==0) return false;
+        Edge edge=new Edge(v,w,0);
         for (int i = 0; i <a ; i++) {
-            if(edgeList.get(i).getFirst().equals(v) && edgeList.get(i).getSecond().equals(w)) return true;
+            if(edge.equalsNonDirected(edgeList.get(i))) return true;
         }
         return false;
     }
@@ -144,9 +146,19 @@ public class EdgeArrayGraphImplPonderado<T>  implements GraphWithWeight<T> {
     public int getWeight(T v, T w) {
         if(a==0) return INFINITE;
         for (int i = 0; i <a ; i++) {
-            if(edgeList.get(i).getFirst().equals(v) && edgeList.get(i).getSecond().equals(w)) return edgeList.get(i).getWeight();
+            if(hasEdge(v,w)) return getEdge(v,w).getWeight();
         }
         return INFINITE;
+    }
+
+    private Edge<T> getEdge(T v,T w){
+        if(a==0) return null;
+        Edge edge=new Edge(v,w,0);
+        for (int i = 0; i <a ; i++) {
+            if(edge.equalsNonDirected(edgeList.get(i))) return edgeList.get(i);
+        }
+        return null;
+
     }
 
     @Override
