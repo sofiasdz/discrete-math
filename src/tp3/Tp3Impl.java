@@ -40,7 +40,6 @@ public class Tp3Impl<T> implements Tp3<T>{
         T w=searchForW(sVector,vertexes, dVector);
         sVector.add(w);
         //elegimos el vertice que no esta en sVector, cuyo weight en d sea el minimo, para ser nuestro w y lo agregamos  a sVector
-        System.out.println(sVector.toString());
         for (int i = 0; i < length; i++) {
             //para todos los vertices comparamos que camino es menor, el que esta o el que pasa por w
             int currentWeight = dVector.get(i).getWeight();
@@ -49,6 +48,7 @@ public class Tp3Impl<T> implements Tp3<T>{
                 dVector.get(i).setWeight(potentialLowerWeight);
                 pVector.get(i).setPrevious(w);
             }
+
         }
         step++;
     }

@@ -53,7 +53,7 @@ public class GraphTest {
         graph.addEdge(3, 4,20);
         graph.addEdge(4, 5,60);
         graph.addEdge(5, 1,100);
-        graph.addEdge(4, 5,60);
+        graph.addEdge(3, 5,10);
 
         Tp3Impl<Integer> impl = new Tp3Impl<Integer>();
         DijkstraResult<Integer> result = impl.dijkstra(graph,1);
@@ -66,23 +66,31 @@ public class GraphTest {
 
     @Test
     public void test_004() {
-        EdgeArrayGraphImplPonderado graph1=new EdgeArrayGraphImplPonderado<String>();
-        graph1.addVertex(1);
-        graph1.addVertex(2);
-        graph1.addVertex(3);
+        EdgeArrayGraphImplPonderado<String> graph1=new EdgeArrayGraphImplPonderado<String>();
+        graph1.addVertex("A");
+        graph1.addVertex("B");
+        graph1.addVertex("C");
+        graph1.addVertex("D");
+        graph1.addVertex("E");
+        graph1.addVertex("F");
 
-        graph1.addEdge(1, 2,22);
-        graph1.addEdge(2, 3,25);
-        graph1.addEdge(3, 1,15);
+        graph1.addEdge("A", "B",4);
+        graph1.addEdge("A", "C",2);
+        graph1.addEdge("C", "B",1);
+        graph1.addEdge("B", "E",7);
+        graph1.addEdge("B", "D",5);
+        graph1.addEdge("C", "E",10);
+        graph1.addEdge("C", "D",8);
+        graph1.addEdge("D", "E",2);
+        graph1.addEdge("E", "F",3);
+        graph1.addEdge("D", "F",6);
 
-        EdgeArrayGraphImpl graph2=new EdgeArrayGraphImpl();
-        graph2.addVertex(1);
-        graph2.addVertex(2);
-        graph2.addVertex(3);
-
-        graph2.addEdge(1, 2);
-        graph2.addEdge(2, 3);
-        graph2.addEdge(3, 1);
+        Tp3Impl<String> impl = new Tp3Impl<String>();
+        DijkstraResult<String> result = impl.dijkstra(graph1,"A");
+        for (int i = 0; i < result.d.size(); i++) {
+            System.out.println("weight for i: "+result.getD().get(i).getT()+" is: "+ result.getD().get(i).getWeight());
+            System.out.println( "its previous is "+result.getPath().get(i).getPrevious());
+        }
     }
 
 }
